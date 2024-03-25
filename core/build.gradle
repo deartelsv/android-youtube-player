@@ -1,6 +1,20 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply plugin: 'maven-publish'
 apply from: '../dependencies.gradle'
+
+subprojects{
+  publishing {
+    publications {
+      "$project.name"(MavenPublication) {
+        groupId project.group
+        artifactId project.name
+        version project.version
+        from components.java
+      }
+    }
+  }
+}
 
 android {
   compileSdkVersion versions.compileSdk
